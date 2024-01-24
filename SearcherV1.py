@@ -65,12 +65,11 @@ async def search_bing_and_duckduckgo_and_yahoo(query, max_results=500, batch_siz
         tasks = [
             fetch_batch_urls(session, query, BASE_URLS["bing"], 0, max_results, batch_size, tqdm(total=max_results, desc=f"Fetching URLs from Bing", unit="URL", dynamic_ncols=True), random.choice(user_agents)),
             fetch_batch_urls(session, query, BASE_URLS["duckduckgo"], 0, max_results, batch_size, tqdm(total=max_results, desc=f"Fetching URLs from DuckDuckGo", unit="URL", dynamic_ncols=True), random.choice(user_agents)),
-            fetch_batch_urls(session, query, BASE_URLS["yahoo"], 0, max_results, batch_size, tqdm(total=max_results, desc=f"Fetching URLs from Yahoo", unit="URL", dynamic_ncols=True), random.choice(user_agents)),
         ]
 
-        bing_results, duckduckgo_results, yahoo_results = await asyncio.gather(*tasks)
+        bing_results, duckduckgo_results = await asyncio.gather(*tasks)
 
-    combined_results = set(bing_results).union(duckduckgo_results).union(yahoo_results)
+    combined_results = set(bing_results).union(duckduckgo_results)
 
     return combined_results
 
