@@ -19,7 +19,6 @@ logo = f"""{grn}
 BASE_URLS = {
     "bing": "http://www.bing.com/search",
     "duckduckgo": "https://duckduckgo.com/html?q={query}",
-    "yahoo": "https://search.yahoo.com/search?p={query}",
 }
 
 async def fetch_batch_urls(session, query, base_url, start, max_results, batch_size, pbar, user_agent):
